@@ -1,0 +1,84 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.Vehicle>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Ewidencja pojazdów";
+}
+<style>
+    tr:nth-child(even) {
+        background-color: #f4f4f4;
+    }
+
+    tr:hover {
+        background-color: #f4f4f4;
+    }
+    tr.haa {
+        display: block;
+        font-size: 1.5em;
+        margin-top: 0.83em;
+        margin-bottom: 0.83em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
+</style>
+
+    <h2>Wszystkie pojazdy</h2>
+
+    <p>
+        @Html.ActionLink("Dodaj pojazd", "Create")
+    </p>
+
+
+@using (Html.BeginForm("Index", "Cast", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table" style="text-align: center; vertical-align: middle;">
+    <tr>
+        <th>
+
+        </th>
+        <th style ="vertical-align: middle;">
+            @Html.ActionLink("Marka", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th style ="vertical-align: middle;">
+            @Html.ActionLink("Model", "Index", new { sortOrder = ViewBag.ModelSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th style ="vertical-align: middle;">
+            @Html.ActionLink("Rocznik", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               <img src=@Html.DisplayFor(modelItem=>item.Url) style="width:240px;height:180px;" />
+            </td>
+            <td style ="vertical-align: middle;">
+                @Html.ActionLink(item.Model, "Details", new { id = item.ID })
+            </td>
+            <td style ="vertical-align: middle;">
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td style ="vertical-align: middle;">
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td style ="vertical-align: middle;">
+                <input type="button" value="Wyświetl szczegóły" class="btn btn-default" onclick="location.href='@Url.Action("Details", new { id = item.ID })'" />
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

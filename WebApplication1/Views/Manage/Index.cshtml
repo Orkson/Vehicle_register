@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@model WebApplication1.Models.IndexViewModel
+@{
+    ViewBag.Title = "Ustawienia konta";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Imię:</dt>
+        <dd>@Html.ActionLink("Dodaj", "ChangePassword")</dd>
+        <dt>Nazwisko:</dt>
+        <dd>@Html.ActionLink("Dodaj", "ChangePassword")</dd>
+        <dt>E-mail:</dt>
+        <dd>@User.Identity.GetUserName()</dd>
+        <dt>Hasło:</dt>
+        <dd>@Html.ActionLink("********", "ChangePassword")</dd>
+
+    </dl>
+</div>

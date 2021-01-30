@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.Vehicle
+@{
+    ViewBag.Title = "Usunięcie pojazdu";
+}
+
+<h2>Usunięcie pojazdu</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+<div>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-actions no-color">
+            <input type="submit" value="Potwierdź usunięcie" class="btn btn-danger" /> 
+            
+        </div>
+        
+
+    }
+        <p>
+            <div class="col-md-2">
+                <input type="button" value="<< Wszystkie pojazdy" class="btn btn-primary" onclick="window.location='@Url.Action("Index")'" />
+            </div>
+
+            .
+
+            <div class="col-md-2">
+                <input type="button" value="Edytuj" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = Model.ID })'" />
+            </div>
+        </p>
+</div>

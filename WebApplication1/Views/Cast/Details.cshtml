@@ -1,0 +1,82 @@
+﻿@model WebApplication1.Models.Vehicle
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<h2>Szczegóły pojazdu</h2>
+
+
+<div>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+
+        </dt>
+        <dd>
+            <img src=@Html.DisplayFor(model=>model.Url) style="width:320px;height:240px;" />
+        </dd>
+        <dt>
+            Model
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            Marka
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            Rocznik
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt>
+            Kolor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            Przebieg
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+
+
+<p>
+    <div class="col-md-2">
+        <input type="button" value="<< Wszystkie pojazdy" class="btn btn-primary" onclick="window.location='@Url.Action("Index")'" />
+    </div>
+
+    .
+
+    <div class="col-md-2">
+        <input type="button" value="Edytuj" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = Model.ID })'" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="button" value="Usuń pojazd" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = Model.ID })'" />
+    </div>
+</p>
